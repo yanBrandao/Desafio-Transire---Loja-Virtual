@@ -13,10 +13,10 @@ namespace DesafioTransire.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DesafioTransireEntities : DbContext
+    public partial class ProductsGH : DbContext
     {
-        public DesafioTransireEntities()
-            : base("name=DesafioTransireEntities")
+        public ProductsGH()
+            : base("name=ProductsGH")
         {
         }
     
@@ -25,7 +25,6 @@ namespace DesafioTransire.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Products> Products { get; set; }
     }
 }

@@ -12,19 +12,19 @@ namespace DesafioTransire.Controllers
 {
     public class ProductsController : Controller
     {
-        private DesafioTransireEntities _db;
+        private ProductsGH _db;
 
         // GET: Products
         public ActionResult Index()
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             return View(_db.Products.ToList());
         }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -50,7 +50,7 @@ namespace DesafioTransire.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Description,URL,Value")] Products product)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (ModelState.IsValid)
             {
 
@@ -75,7 +75,7 @@ namespace DesafioTransire.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -95,7 +95,7 @@ namespace DesafioTransire.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Description, URL,Value")] Products product)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (ModelState.IsValid)
             {
                 _db.Entry(product).State = EntityState.Modified;
@@ -108,7 +108,7 @@ namespace DesafioTransire.Controllers
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -126,7 +126,7 @@ namespace DesafioTransire.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             Products product = _db.Products.Find(id);
             _db.Products.Remove(product);
             _db.SaveChanges();
@@ -135,7 +135,7 @@ namespace DesafioTransire.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            _db = new DesafioTransireEntities();
+            _db = new ProductsGH();
             if (disposing)
             {
                 _db.Dispose();
