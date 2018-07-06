@@ -12,22 +12,24 @@ namespace DesafioTransire.Controllers
 {
     public class ProductsController : Controller
     {
-        private Context db = new Context();
+        private DesafioTransireEntities _db;
 
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            _db = new DesafioTransireEntities();
+            return View(_db.Products.ToList());
         }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
+            _db = new DesafioTransireEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -46,12 +48,24 @@ namespace DesafioTransire.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Value")] Product product)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,URL,Value")] Products product)
         {
+            _db = new DesafioTransireEntities();
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+
+                if (_db.Products.FirstOrDefault() == null)
+                {
+                    product.ID = 0; //First Element in BD
+                    
+                }
+                else
+                {
+                    int maxId = _db.Products.Max(prod => prod.ID);
+                    product.ID = maxId + 1;
+                }
+                _db.Products.Add(product);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,11 +75,12 @@ namespace DesafioTransire.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            _db = new DesafioTransireEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -78,12 +93,13 @@ namespace DesafioTransire.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Value")] Product product)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description, URL,Value")] Products product)
         {
+            _db = new DesafioTransireEntities();
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(product).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -92,11 +108,12 @@ namespace DesafioTransire.Controllers
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
+            _db = new DesafioTransireEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = _db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -109,17 +126,19 @@ namespace DesafioTransire.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            _db = new DesafioTransireEntities();
+            Products product = _db.Products.Find(id);
+            _db.Products.Remove(product);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
+            _db = new DesafioTransireEntities();
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

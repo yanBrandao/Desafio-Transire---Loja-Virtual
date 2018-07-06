@@ -1,6 +1,8 @@
 ﻿using DesafioTransire.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,11 +11,13 @@ namespace DesafioTransire.Controllers
 {
     public class HomeController : Controller
     {
-        private Context db = new Context();
+        private DesafioTransireEntities _db;
 
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            _db = new DesafioTransireEntities();
+            
+            return View(_db.Products.ToList());
         }
 
         public ActionResult About()
