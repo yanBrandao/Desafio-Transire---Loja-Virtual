@@ -19,6 +19,16 @@ namespace DesafioTransire
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            //SweetAlert CSS
+            bundles.Add(new ScriptBundle("~/bundles/sweet-alert").Include(
+                        "~/Styles/sweetalert.css",
+                        "~/Content/sweetalert/sweet-alert.css"
+                        ));
+
+            //Sweet Alert JS
+            bundles.Add(new ScriptBundle("~/bundles/sweet-alertjs").Include(
+                        "~/Scripts/sweetalert.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 

@@ -11,12 +11,14 @@ namespace DesafioTransire.Controllers
 {
     public class HomeController : Controller
     {
+        
+
         private ProductsGH _db;
 
         public ActionResult Index()
         {
             _db = new ProductsGH();
-            
+           
             return View(_db.Products.ToList());
         }
 
