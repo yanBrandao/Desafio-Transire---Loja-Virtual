@@ -232,6 +232,8 @@
     <Content Include="Models\ProductsGHModel.edmx.diagram">
       <DependentUpon>ProductsGHModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\desafio-transire - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\desafio-transire - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\desafiotransire - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\desafiotransire - Web Deploy.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />

@@ -20,9 +20,11 @@
 </div>
 
 <div class="row">
-    <h2>
-        Produtos em destaque (Lançamentos)
-    </h2>
+    <div class="col-md-4">
+        <h2>
+            Produtos em destaque (Lançamentos)
+        </h2>
+    </div>
 </div>
 <div class="row">
 
@@ -37,7 +39,8 @@
                     <p>
                         @Html.DisplayFor(modelItem => item.Description)
                     </p>
-                    <p><a class="btn btn-default" href="@Html.DisplayFor(modelItem => item.ID)">Alugar &raquo;</a></p>
+                    @Html.ActionLink("Ver mais", "../Products/Details", new { id = item.ID }, new { @class = "btn btn-secondary" })
+                   
                 </div>
             </form>
         </div>

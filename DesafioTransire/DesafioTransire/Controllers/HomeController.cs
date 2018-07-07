@@ -17,8 +17,7 @@ namespace DesafioTransire.Controllers
         {
             _db = new ProductsGH();
             
-            //return View(_db.Products.ToList());
-            return Content("Teste GearHost");
+            return View(_db.Products.ToList());
         }
 
         public ActionResult About()
