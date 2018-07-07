@@ -62,11 +62,23 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <script type="text/javascript">
     $('#btnCreate').click(function () {
-        swal("Sucesso!", "Filme adicionado ao acervo com sucesso!", "success")
+        var someoneIsEmpty = false;
+        $('.form-control').each(function () {
+            console.debug($(this).val());
+            if ($(this).val().length === 0) {
+                someoneIsEmpty = true;
+            }
+        }
+        );
+        if (!someoneIsEmpty) {
+            swal("Sucesso!", "Filme adicionado ao acervo com sucesso!", "success");
+        }
+        
         $('#create').submit();
     });
 </script>
